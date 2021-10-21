@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useState } from 'react';
 import './App.css';
 import { FaStar } from 'react-icons/fa';
+import Refactoring from './components/Refactoring';
 
 const createArray = (length) => [
   ...Array(length)
@@ -49,6 +50,8 @@ let App = ( {paragraph} ) => {
 
       <h1>{paragraph}</h1>
 
+      <Refactoring />
+
       <div>
         <h2>Hooks allow:</h2>
         <ol>
@@ -85,6 +88,8 @@ let App = ( {paragraph} ) => {
         </ul>
         <button onClick = {() => setData([])}>Remove data</button>
       </div>
+
+      {/* <Refactoring /> */}
     
     </div>
   );
