@@ -1,23 +1,91 @@
-import logo from './logo.svg';
+import { useEffect, useReducer, useState } from 'react';
 import './App.css';
+import { FaStar } from 'react-icons/fa';
 
-function App() {
+const createArray = (length) => [
+  ...Array(length)
+];
+
+let Star = ( {selected, onSelect} ) => {
+  return(
+    <FaStar color={selected ? 'black' : 'grey'} 
+      onClick={onSelect}/>
+  );
+}
+
+
+let StarRating = ({ totalStars = 5 }) => {
+  const [selected, setSelected] = useState(0);
+  return <>
+    {createArray(totalStars).map( (n, i) => <Star 
+      key={i} 
+      selected={selected > i} 
+      onSelect={() => setSelected(i+1)} /> 
+    )}
+  </>
+}
+
+let App = ( {paragraph} ) => {
+  const [name, setName] = useState('react.js');
+
+  const [checked, setChecked] = useState(false);
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch(`https://api.github.com/users`)
+      .then((response) => response.json())
+      .then(setData)
+  }, [])
+  // if(data) {
+  //   return (
+  //     <ul>
+  //       {data.map((user) => <li>{user.login}</li>)}
+  //     </ul>
+  //   )
+  // }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{marginLeft: '5%'}}>
+
+      <h1>{paragraph}</h1>
+
+      <div>
+        <h2>Hooks allow:</h2>
+        <ol>
+          <li>Add State to Function Components</li>
+          <li>Abstract Logic into Separate Functions</li>
+        </ol>
+      </div>
+
+      <div>
+        <p>Studying <b>{name}</b></p>
+        <button 
+          onClick={() => setName('node.js')}
+        >Click to change</button>
+      </div>
+
+      <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+        <input 
+          type={'checkbox'} 
+          value={checked}
+          onChange={() => setChecked(!checked)}
+        />
+        <p>{checked ? 'checked' : 'not checked'}</p>
+      </div>
+
+      <StarRating totalStars={10}/>
+
+      <section>
+        <em>api.github.com/users</em>
+      </section>
+
+      <div>
+        <ul>
+          {data.map((user) => <li>{user.login}</li>)}
+        </ul>
+        <button onClick = {() => setData([])}>Remove data</button>
+      </div>
+    
     </div>
   );
 }

@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App paragraph={'REACT HOOKS'}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
