@@ -45,6 +45,8 @@ let App = ( {paragraph} ) => {
       <h1>{paragraph}</h1>
       <UseRefHook />
 
+      <p><b>usehooks.com</b> - for looking other custom hooks by devs</p>
+
 
       <div>
         <h2>Hooks allow:</h2>
