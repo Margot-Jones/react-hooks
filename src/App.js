@@ -2,6 +2,7 @@ import { useEffect, useReducer, useState } from 'react';
 import './App.css';
 import { FaStar } from 'react-icons/fa';
 import Refactoring from './components/Refactoring';
+import UseRefHook from './components/UseRefHook';
 
 const createArray = (length) => [
   ...Array(length)
@@ -37,20 +38,13 @@ let App = ( {paragraph} ) => {
       .then((response) => response.json())
       .then(setData)
   }, [])
-  // if(data) {
-  //   return (
-  //     <ul>
-  //       {data.map((user) => <li>{user.login}</li>)}
-  //     </ul>
-  //   )
-  // }
 
   return (
     <div style={{marginLeft: '5%'}}>
 
       <h1>{paragraph}</h1>
+      <UseRefHook />
 
-      <Refactoring />
 
       <div>
         <h2>Hooks allow:</h2>
@@ -89,7 +83,7 @@ let App = ( {paragraph} ) => {
         <button onClick = {() => setData([])}>Remove data</button>
       </div>
 
-      {/* <Refactoring /> */}
+      <Refactoring />
     
     </div>
   );
